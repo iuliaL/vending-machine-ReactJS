@@ -30,14 +30,13 @@ export default class Machine extends React.Component{
 		service.products.then((res) => {
 			//console.log('Stock is',res);
 			this.setState({
-				products: res,
-				busy: false
+				products: res
 			});
 		}).catch((e) => console.log(e));
 		//.finally(()=> this.setState({ busy : false }))
 	}
     get(value) {
-	    console.log('got value',value);
+	    //console.log('got value',value);
 	    this.setState({ paid : false, productType : value});
         service.product(value)
 	        .then((product)=> {
@@ -92,7 +91,6 @@ export default class Machine extends React.Component{
 	}
 }
 
-// inspired from UnderscoreJs
 function debounce(callback, seconds) {
 	let timer = null;
 	return function () {
