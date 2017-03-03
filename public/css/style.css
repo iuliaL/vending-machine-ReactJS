@@ -1,0 +1,63 @@
+.wrapper {
+    max-width: 400px;
+    margin: auto;
+    margin-top: 50px;
+}
+.loader {
+    width: 120px;
+    position: absolute;
+    top: -70px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.panel {
+    border: 10px solid #ebccd1;
+}
+.panel-heading {border-radius: 0}
+.panel-footer {position: relative}
+.spacer {
+    padding: 30px 0;
+}
+.status {
+    padding: 7px 12px;
+    margin-bottom: 0;
+
+}
+.input-group {
+    margin: auto;
+    width: 100px;
+}
+.btn {
+    width: 100%;
+    position: relative;
+}
+.btn:focus,.btn:active, .btn:active:focus {outline: none }
+.disabled:after {
+    content: 'SOLD OUT';
+    position: absolute;
+    left: 15px;
+    transform: rotate(-45deg);
+    background: black;
+    color: #fff;
+    padding: 2px 8px;
+    transform-origin: 40% 80%;
+}
+.coke {
+    background: #f00;
+}
+.sprite {
+    background: rgba(0, 166, 0, 0.9);
+}
+.fanta {
+    background: #ffa500;
+}
+.chocolate {
+    background: #be5416;
+}
+.crackers {
+    background: #ffdead;
+}
+.biscuits {
+    background-color: #f77 ;
+}
