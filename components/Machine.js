@@ -45,6 +45,7 @@ export default class Machine extends React.Component{
 	        	console.log('product', product);
 		        this.price = product.price;
 	        	this.setState({ display: this.price });
+		        this.checkAffordable();
 	        }).catch((e)=> console.log(e));
     }
     /* update display after inserting cash */
@@ -56,8 +57,11 @@ export default class Machine extends React.Component{
     	console.log("CASH AMOUNT", cash, 'price is', this.price);
     	this.balance += cash;
 	    this.updateDisplay(Math.abs(this.checkBalance()));
+	    this.checkAffordable()
+    }
+    checkAffordable () {
 	    if(this.checkBalance() >= 0 ){
-	    	this.pay();
+		    this.pay();
 	    }
     }
 	checkBalance (){

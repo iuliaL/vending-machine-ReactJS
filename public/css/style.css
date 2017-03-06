@@ -68,4 +68,4 @@
     font-style: italic;
     padding: 1px 5px;
 }
-.disabled + .price { display: none;}
+.disabled + .price {visibility: hidden;}
