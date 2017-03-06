@@ -1,4 +1,4 @@
-#### Preview Link here [ https://iulial.github.io/vending-machine-ReactJS ]
+#### GH Pages Preview Link here [ https://iulial.github.io/vending-machine-ReactJS ]
 ### Project Review
 
 Why did I chose the frameworks and libraries I did?
