@@ -38,11 +38,9 @@ export default class Machine extends React.Component{
 	}
 	/* GET product price */
     getPrice(value) {
-	    console.log('got value',value);
 	    this.setState({ paid : false, productType : value});
         service.product(value)
 	        .then((product)=> {
-	        	console.log('product', product);
 		        this.price = product.price;
 	        	this.setState({ display: this.price });
 		        this.checkAffordable();
@@ -54,7 +52,6 @@ export default class Machine extends React.Component{
     }
     /* check if enough money */
     gotCash(cash){
-    	console.log("CASH AMOUNT", cash, 'price is', this.price);
     	this.balance += cash;
 	    this.updateDisplay(Math.abs(this.checkBalance()));
 	    this.checkAffordable()
