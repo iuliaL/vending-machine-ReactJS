@@ -70,7 +70,6 @@ export default class Machine extends React.Component{
     pay(){
 	    service.updateStock(this.state.productType)
 		    .then((res) => {
-			    console.log('Stock updated', res);
 			    // extract the price from balance
 			    this.balance = this.checkBalance();
 			    // reset price to zero
