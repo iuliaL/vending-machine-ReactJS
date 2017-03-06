@@ -6,6 +6,8 @@ export default (props) =>{
 		<div className="spacer">
 		<button className={"btn "+ (props.details.type.toLowerCase()) + (!props.details.quantity ? ' disabled' : '')}
 		        onClick={onSelect}>{props.details.type}</button>
+			<small className="price">{props.details.price}</small>
 		</div>
+		
 	)
 }

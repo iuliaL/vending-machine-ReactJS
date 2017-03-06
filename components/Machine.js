@@ -5,6 +5,7 @@ import React from 'react';
 // Components
 import Display from './Display';
 import Product from './Product';
+import Wallet from './Wallet';
 
 // Functions
 import service from '../service';
@@ -19,42 +20,64 @@ export default class Machine extends React.Component{
 			paid: false,
 			productType: null
 		};
+		this.price = 0;
+		this.balance = 0;
 		this.getAll = this.getAll.bind(this);
-		this.get = this.get.bind(this);
+		this.getPrice = this.getPrice.bind(this);
 		this.pay = this.pay.bind(this);
 		this.deliver = debounce(this.deliver,1500).bind(this);
 		this.reset = debounce(this.reset,2000).bind(this);
+		this.gotCash =  this.gotCash.bind(this);
 	}
 	getAll(){
-		this.setState({ busy : true });
 		service.products.then((res) => {
-			//console.log('Stock is',res);
 			this.setState({
 				products: res
 			});
 		}).catch((e) => console.log(e));
-		//.finally(()=> this.setState({ busy : false }))
 	}
-    get(value) {
-	    //console.log('got value',value);
+	/* GET product price */
+    getPrice(value) {
+	    console.log('got value',value);
 	    this.setState({ paid : false, productType : value});
         service.product(value)
 	        .then((product)=> {
-	        	//console.log('product',product);
-	        	this.setState({ display: product.price });
+	        	console.log('product', product);
+		        this.price = product.price;
+	        	this.setState({ display: this.price });
 	        }).catch((e)=> console.log(e));
     }
+    /* update display after inserting cash */
+    updateDisplay(due){
+    	this.setState({ display: due});
+    }
+    /* check if enough money */
+    gotCash(cash){
+    	console.log("CASH AMOUNT", cash, 'price is', this.price);
+    	this.balance += cash;
+	    this.updateDisplay(Math.abs(this.checkBalance()));
+	    if(this.checkBalance() >= 0 ){
+	    	this.pay();
+	    }
+    }
+	checkBalance (){
+		return +(this.balance - this.price).toFixed(2);
+	}
     componentDidMount() {
     	this.getAll();
     }
     pay(){
-    	service.updateStock(this.state.productType)
+	    service.updateStock(this.state.productType)
 		    .then((res) => {
-		    	//console.log('Stock updated', res);
-			    this.setState({ products: res, display: '0.00', paid: true, busy: true});
+			    console.log('Stock updated', res);
+			    // extract the price from balance
+			    this.balance = this.checkBalance();
+			    // reset price to zero
+			    this.price = 0;
+			    //display balance
+			    this.setState({products: res, display: this.balance, paid: true, busy: true});
 			    this.deliver();
-        }).catch((e)=>console.log(e));
-    	
+		    }).catch((e)=>console.log(e));
     }
     deliver(){
     	this.setState({paid: true, busy: false});
@@ -62,12 +85,12 @@ export default class Machine extends React.Component{
 	    this.reset();
     }
     reset(){
-	    this.setState({paid: false});
+	    this.setState({ paid: false });
     }
 	render() {
 		let products = this.state.products.map((p)=>
 			<div className="col-xs-4" key={p.uid}>
-				<Product details={p} onProduct={this.get}/>
+				<Product details={p} onProduct={this.getPrice}/>
 			</div>);
 		return (
 			<div className="panel panel-danger text-center">
@@ -82,9 +105,11 @@ export default class Machine extends React.Component{
 			    </div>
 				<div className="panel-footer">
 					{!this.state.productType && !this.state.busy && <p className="status">Select Product</p>}
-					{this.state.productType && !this.state.paid && <button className="btn btn-default" onClick={this.pay}>Pay amount</button>}
+					{ this.state.productType && !this.state.paid &&
+						<Wallet onCash = {this.gotCash }/>
+					}
 					{this.state.busy && <p className="status"><span>Delivering...</span><img src="../ajax-loader.gif" className="loader"/></p>}
-					{this.state.paid && !this.state.busy && <p className="status">Enjoy!</p>}
+					{this.state.paid && !this.state.busy && <p className="status">ENJOY!</p>}
 				</div>
 			</div>
 		)
