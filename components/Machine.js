@@ -108,7 +108,7 @@ export default class Machine extends React.Component{
 					{ this.state.productType && !this.state.paid &&
 						<Wallet onCash = {this.gotCash }/>
 					}
-					{this.state.busy && <p className="status"><span>Delivering...</span><img src="../ajax-loader.gif" className="loader"/></p>}
+					{this.state.busy && <p className="status"><span>Delivering...</span><img src="/ajax-loader.gif" className="loader"/></p>}
 					{this.state.paid && !this.state.busy && <p className="status">ENJOY!</p>}
 				</div>
 			</div>
