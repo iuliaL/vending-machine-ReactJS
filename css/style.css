@@ -32,6 +32,7 @@
     width: 100%;
     position: relative;
 }
+.btn-success {width : auto;}
 .btn:focus,.btn:active, .btn:active:focus {outline: none }
 .disabled:after {
     content: 'SOLD OUT';
@@ -61,3 +62,10 @@
 .biscuits {
     background-color: #f77 ;
 }
+.price {
+    background: #000;
+    color: #fff;
+    font-style: italic;
+    padding: 1px 5px;
+}
+.disabled + .price { display: none;}
