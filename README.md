@@ -3,13 +3,13 @@
 
 Why did I chose the frameworks and libraries I did?
 
-I chose :
+Stack :
    - ReactJs because this vending machine app is a great React exercise
    - Browserify for making use of node modularity on the client-side and bundle those together
    - watchify - development watcher that observes changes and rebundles the modules when something changed
    - small static server with Express to have my front-end served easily
 
-What functionality did I focus on? What did I omit? Why?
+What functionality did I focus on? What did I omit?
 
 The vending machine flow:
 First the user is asked to select a product, he gets the price displayed, then he needs to insert cash relying 
@@ -19,13 +19,7 @@ is updated so if the prouduct is demanded again and again it will soon get out o
 data, of course.
 I did not implement the posibility to cash out the change.
 Also when the machine has nothing left to sell the status is still 'Select product'.
-I focused on the main actions as this was the request.
+I focused on the main actions.
 
-
-What were your design/architecture considerations?
-
-I used BSON - like Javascript objects in my mocks - easy to operate with
-The currency field is obsolete for this example because there is no other currency besides EUR, but I thought the property
-would be there in real life. 
 
 
